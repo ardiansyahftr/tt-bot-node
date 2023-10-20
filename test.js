@@ -111,7 +111,7 @@ import table from "table"; // Individual classes
     });
   }
   async function getPosts(username, jml, cursor = 0) {
-    var token = "ac2a4e2cf3msh1cee86e1b34183fp1c78c0jsn71e2cc3267f8";
+    var token = "*";
     const config = {headers : {
       'X-RapidAPI-Key' : token,
       'X-RapidAPI-Host': 'tiktok-video-no-watermark2.p.rapidapi.com'
@@ -152,7 +152,7 @@ import table from "table"; // Individual classes
       "_" +
       data_videos[i].video_id +
       ".mp4";
-      var downloadLink = data_videos[i].play;
+      var downloadLink = data_videos[i].hdplay;
       if (downloadLink) {
         await axios
           .get(downloadLink, {
