@@ -9,6 +9,7 @@
         "chalk": "^5.1.2",
         "fs-extra": "^10.1.0",
         "inquirer": "^9.1.4",
+        "table": "^6.8.1",
         "tiktok-scraper-ts": "^1.4.1"
     }
 }

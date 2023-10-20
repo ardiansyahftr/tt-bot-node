@@ -92,7 +92,6 @@ import table from "table"; // Individual classes
       ])
       .then((answers) => {
         const data_return = isNaN(Number(answers.appMenuPost)) ? 0 : Number(answers.appMenuPost);
-        console.log(answers.appMenuPost);
         return (data_return == 1 || data_return == 2 || data_return == 3 || data_return == 4) ? data_return : 0;
       });
       }
@@ -187,41 +186,4 @@ import table from "table"; // Individual classes
     ])
 
   }
-  // const user = await TikTokScraper.user(username);
-  //     console.log(user);
-  // const downloadLink1 = await TikTokScraper.noWaterMark(
-  //     fetchVideo[i].directVideoUrl
-  // );
-
-  // const folder = `videos`;
-  // if (!fs.existsSync(`videos`)) fs.mkdirSync(`videos`);
-  // if (!fs.existsSync(folder)) fs.mkdirSync(folder);
-  // let filename =
-  // "a" +
-  // "_" +
-  // "b" +
-  // "_" +
-  // "c" +
-  // ".mp4";
-  // var downloadLink = "https://v39-eu.tiktokcdn.com/c253aa5a74a999492bf12ee0840b2438/64f6d9db/video/tos/useast2a/tos-useast2a-ve-0068c003/okJnADt3DfqgIqeQkjkAAXVbU5dRBIE8xQBplT/?a=1340&ch=0&cr=13&dr=0&lr=all&cd=0%7C0%7C0%7C&cv=1&br=2462&bt=1231&cs=0&ds=6&ft=kLeR.y_RZL10PD1WBn8Xg9wNTbajJEeC~&mime_type=video_mp4&qs=0&rc=bGR3bHdyMWhpbndsQGozQHN1eWgxZnNud2xAKTU7ZDw0Zzc7Ojc8Ojc0ZGZnKTNtbm94OjZ2cmYzM2o3PHl5bVxwaXBtYWIrbGhxYCMucCNib3BoXitsaHFgMTJjLjBhNmM2Xl8zMjM1LTpjLWYtMWI0YGZpZy0tMTEtLTo%3D&l=20230905013334D27BA5A8E870D161EB9A&btag=e0008d000";
-  // if (downloadLink) {
-  //     await axios
-  //       .get(downloadLink, {
-  //         responseType: "stream",
-  //       })
-  //       .then((response) => {
-  //         response.data.pipe(fs.createWriteStream(`${folder}/${filename}`));
-  //         console.log(
-  //           chalk.green(`[+] Download successfully (${filename})\n`)
-  //         );
-  //       })
-  //       .catch((error) => {
-  //         console.log(chalk.red("[!] Failed to download video.\n"));
-  //       });
-  //   } else {
-  //     console.log(
-  //       chalk.red("[!] Failed to get video link without watermark.\n")
-  //     );
-  //   }
-
 })();
