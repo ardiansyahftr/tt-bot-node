@@ -69,10 +69,12 @@ import table from "table"; // Individual classes
           ])
           .then((answers) => {
             const data_return = isNaN(Number(answers.jmlVid)) ? 10 : Number(answers.jmlVid);
-            return data_return > 33 ? 33 : data_return;
+            // return data_return > 33 ? 33 : data_return;
+            return data_return;
           });
-          const data_posts = await getPosts(username, jml, g_cursor);
-          g_cursor = data_posts.data.cursor;
+          // const data_posts = await getPosts(username, jml, g_cursor);
+          const data_posts = await getHDPosts(username, jml, g_cursor, 1);
+          // console.log(data_posts);
           populateDatatable(data_posts);
           showDatatable();
         } else if (menu_post == 2) {
@@ -124,9 +126,33 @@ import table from "table"; // Individual classes
     return data;
   }
   
+  async function getHDPosts(username, jml, cursor = 0, hd = 0) {
+    var total_batch = 1;
+    var mod_batch = 0;
+    if (jml > 33) {
+      
+    }
+    const url_get_videos = `https://www.tikwm.com/api/user/posts?unique_id=${username}&count=${jml}&cursor=${cursor}`;
+    const data = await axios.get(url_get_videos)
+      .then(res => res.data)
+      .catch(err => console.error(err));
+    g_cursor = data.data.cursor;
+    var return_data = [];
+    for (let i = 0; i < data.data.videos.length; i++) {
+      const data_video = data.data.videos[i];
+      var url_video = `https://www.tiktok.com/@${username}/video/${data_video.video_id}`;
+      const url_get_video = `https://www.tikwm.com/api?url=${url_video}&hd=${hd}`;
+      const response_video = await axios.get(url_get_video)
+        .then(res => res.data)
+        .catch(err => console.error(err));
+      return_data.push(response_video.data);
+    }
+    return return_data;
+  }
+  
   function populateDatatable(data_posts) {
-    for (let i = 0; i < data_posts.data.videos.length; i++) {
-      const element = data_posts.data.videos[i];
+    for (let i = 0; i < data_posts.length; i++) {
+      const element = data_posts[i];
       data_table.push([
         (data_table.length),
         new Date(element.create_time * 1000).toISOString().replace("T"," ").replace(".000Z",""),
@@ -150,7 +176,7 @@ import table from "table"; // Individual classes
       let filename =
       new Date(data_videos[i].create_time * 1000).toISOString().split("T")[0] +
       "_" +
-      data_videos[i].video_id +
+      data_videos[i].id +
       ".mp4";
       var downloadLink = data_videos[i].hdplay;
       if (downloadLink) {
